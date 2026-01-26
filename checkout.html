@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout - Khulna Store</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ================= HEADER (SAME AS INDEX) ================= -->
+<header class="header">
+
+  <div class="header-container">
+
+    <div class="logo">Khulna<span>Store</span></div>
+
+    <div class="header-search">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input placeholder="Search products..." onclick="window.location.href='index.html'">
+      </div>
+    </div>
+
+    <div class="header-actions">
+
+      <a href="cart.html" class="cart-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="8" cy="21" r="1"/>
+          <circle cx="19" cy="21" r="1"/>
+          <path d="M2 2h3l3.6 7.59h9.72L22 6H6"/>
+        </svg>
+        <span id="cartCount">0</span>
+      </a>
+
+      <button class="hamburger" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+
+  </div>
+
+</header>
+
+<!-- NAV DROPDOWN -->
+<div class="nav-wrapper" id="navWrapper">
+  <div class="nav-backdrop" id="navBackdrop"></div>
+  <div class="nav-dropdown" id="navDropdown">
+    <a href="index.html">Home</a>
+    <a href="order-status.html">Track Order</a>
+    <a href="order-status.html">My Orders</a>
+    <a href="about.html">About Us</a>
+    <a href="contact.html">Contact</a>
+    <a href="terms.html">Terms & Policy</a>
+  </div>
+</div>
+
+
+
+<main class="checkout-wrapper">
+
+  <!-- ================= CUSTOMER INFO ================= -->
+  <section class="checkout-section">
+    <h2><span class="step">1</span> Customer Information</h2>
+
+    <div class="form-grid">
+      <input id="firstName" placeholder="First Name*">
+      <input id="lastName" placeholder="Last Name*">
+      <input id="phone" placeholder="Mobile*">
+      <input id="email" placeholder="Email">
+      <textarea id="address" placeholder="Full Address*"></textarea>
+      <input id="area" placeholder="Upazila / Thana*">
+     <select id="district">
+  <option value="">Select District</option>
+
+  <option>Bagerhat</option>
+  <option>Bandarban</option>
+  <option>Barguna</option>
+  <option>Barishal</option>
+  <option>Bhola</option>
+  <option>Bogra</option>
+  <option>Brahmanbaria</option>
+  <option>Chandpur</option>
+  <option>Chapai Nawabganj</option>
+  <option>Chattogram</option>
+  <option>Chuadanga</option>
+  <option>Cox's Bazar</option>
+  <option>Comilla</option>
+  <option>Dhaka</option>
+  <option>Dinajpur</option>
+  <option>Faridpur</option>
+  <option>Feni</option>
+  <option>Gaibandha</option>
+  <option>Gazipur</option>
+  <option>Gopalganj</option>
+  <option>Habiganj</option>
+  <option>Jamalpur</option>
+  <option>Jashore</option>
+  <option>Jhalokati</option>
+  <option>Jhenaidah</option>
+  <option>Joypurhat</option>
+  <option>Khagrachari</option>
+  <option>Khulna</option>
+  <option>Kishoreganj</option>
+  <option>Kurigram</option>
+  <option>Kushtia</option>
+  <option>Lakshmipur</option>
+  <option>Lalmonirhat</option>
+  <option>Madaripur</option>
+  <option>Magura</option>
+  <option>Manikganj</option>
+  <option>Meherpur</option>
+  <option>Moulvibazar</option>
+  <option>Munshiganj</option>
+  <option>Mymensingh</option>
+  <option>Naogaon</option>
+  <option>Narail</option>
+  <option>Narayanganj</option>
+  <option>Narsingdi</option>
+  <option>Natore</option>
+  <option>Netrokona</option>
+  <option>Nilphamari</option>
+  <option>Noakhali</option>
+  <option>Pabna</option>
+  <option>Panchagarh</option>
+  <option>Patuakhali</option>
+  <option>Pirojpur</option>
+  <option>Rajbari</option>
+  <option>Rajshahi</option>
+  <option>Rangamati</option>
+  <option>Rangpur</option>
+  <option>Satkhira</option>
+  <option>Shariatpur</option>
+  <option>Sherpur</option>
+  <option>Sirajganj</option>
+  <option>Sunamganj</option>
+  <option>Sylhet</option>
+  <option>Tangail</option>
+  <option>Thakurgaon</option>
+</select>
+
+    </div>
+  </section>
+
+
+  <!-- ================= ORDER OVERVIEW ================= -->
+  <section class="checkout-section">
+    <h2><span class="step">2</span> Order Overview</h2>
+
+    <div class="checkout-card order-overview">
+
+
+
+  <div id="orderItems"></div>
+
+  <div class="summary-totals">
+    <div class="summary-row">
+      <span>Sub-Total</span>
+      <span id="subTotal">৳ 0</span>
+    </div>
+
+    <div class="summary-row">
+      <span>Home Delivery</span>
+      <span id="deliveryFee">৳ 60</span>
+    </div>
+
+    <div class="summary-row total-row">
+      <span>Total</span>
+      <span id="grandTotal">৳ 0</span>
+    </div>
+  </div>
+
+</div>
+
+  </section>
+
+
+  <!-- ================= PAYMENT ================= -->
+  <section class="checkout-section">
+    <h2><span class="step">3</span> Payment Method</h2>
+
+    <div class="payment-options">
+
+      <div class="payment-card active" data-method="COD">
+        Cash on Delivery
+      </div>
+
+      <div class="payment-card" data-method="bkash">
+        <img src="images/BKash.png">
+      </div>
+
+      <div class="payment-card" data-method="nagad">
+        <img src="images/Nagad.png">
+      </div>
+
+    </div>
+
+    <!-- Manual Payment Box -->
+    <div id="manualPaymentBox" class="manual-box">
+      <p class="pay-to">
+        Pay to: <strong id="merchantNumber">01XXXXXXXXX</strong>
+      </p>
+
+      <input id="payerNumber" placeholder="Your bKash/Nagad Number">
+      <input id="trxId" placeholder="Transaction ID">
+    </div>
+  </section>
+
+
+  <!-- ================= AGREEMENT ================= -->
+  <div class="agreement">
+    <input type="checkbox" id="agreeTerms">
+    <label>
+      I have read and agree to the
+      <a href="terms.html">Terms & Conditions</a>
+      and
+      <a href="terms.html">Privacy Policy</a>
+    </label>
+  </div>
+
+  <button id="confirmOrderBtn" class="confirm-btn">
+    Confirm Order
+  </button>
+
+</main>
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <div class="footer-col">
+      <h4>KhulnaStore</h4>
+      <p>Quality products at best prices.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="index.html">Home</a>
+      <a href="order-status.html">Track Order</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="terms.html">Terms & Policy</a>
+      <a href="about.html">About Us</a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Khulna Store. All rights reserved.
+  </div>
+
+</footer>
+
+<div id="toast" class="toast"></div>
+
+<script>
+/* NAV TOGGLE */
+const menuToggle = document.getElementById("menuToggle");
+const navWrapper = document.getElementById("navWrapper");
+const navBackdrop = document.getElementById("navBackdrop");
+
+menuToggle?.addEventListener("click", () => {
+  menuToggle.classList.toggle("active");
+  navWrapper.classList.toggle("open");
+});
+
+navBackdrop?.addEventListener("click", () => {
+  menuToggle.classList.remove("active");
+  navWrapper.classList.remove("open");
+});
+</script>
+
+<script type="module" src="js/checkout.js"></script>
+</body>
+</html>
