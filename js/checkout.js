@@ -3,6 +3,9 @@ import {
   collection,
   addDoc,
   getDoc,
+  getDocs,
+  query,
+  where,
   doc,
   updateDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -36,6 +39,37 @@ let selectedPayment = "COD";
 let cart = [];
 
 
+// ================= ORDER ID GENERATOR =================
+
+function generateRandomId(length = 6) {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let result = "";
+  for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return `KS-${result}`;
+}
+
+async function generateUniquePublicId() {
+  let publicId;
+  let exists = true;
+
+  while (exists) {
+    publicId = generateRandomId();
+
+    const q = query(
+      collection(db, "orders"),
+      where("publicId", "==", publicId)
+    );
+
+    const snapshot = await getDocs(q);
+    exists = !snapshot.empty;
+  }
+
+  return publicId;
+}
+
+
 // ================= LOAD CART =================
 
 function getCart() {
@@ -43,7 +77,8 @@ function getCart() {
 }
 
 function calculateSubtotal(cart) {
-  return cart.reduce((sum, item) => sum + (item.price || 0) * (item.qty || 0), 0);
+  return cart.reduce((sum, item) =>
+    sum + (item.price || 0) * (item.qty || 0), 0);
 }
 
 
@@ -96,7 +131,6 @@ paymentCards.forEach(card => {
       merchantNumberEl.textContent =
         MERCHANT_NUMBERS[selectedPayment];
     }
-
   });
 });
 
@@ -148,9 +182,13 @@ confirmBtn.addEventListener("click", async () => {
 
   try {
 
+    // Generate short public ID
+    const publicId = await generateUniquePublicId();
+
     // ================= SAVE ORDER =================
 
     const orderRef = await addDoc(collection(db, "orders"), {
+      publicId, // 🔥 short ID saved here
       customer: {
         firstName,
         lastName,
@@ -186,10 +224,9 @@ confirmBtn.addEventListener("click", async () => {
     // ================= SAFE STOCK REDUCTION =================
 
     try {
-
       for (let item of cart) {
 
-        if (!item.id) continue; // prevent crash
+        if (!item.id) continue;
 
         const productRef = doc(db, "products", item.id);
         const productSnap = await getDoc(productRef);
@@ -204,7 +241,6 @@ confirmBtn.addEventListener("click", async () => {
           });
         }
       }
-
     } catch (stockError) {
       console.warn("Stock update failed:", stockError);
     }
@@ -213,10 +249,10 @@ confirmBtn.addEventListener("click", async () => {
 
     localStorage.removeItem("cart");
 
-    // ================= REDIRECT =================
+    // ================= REDIRECT USING SHORT ID =================
 
     window.location.href =
-      `order-status.html?orderId=${orderRef.id}`;
+      `order-status.html?orderId=${publicId}`;
 
   } catch (error) {
 
