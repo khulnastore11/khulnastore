@@ -3,11 +3,13 @@ from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const auth = getAuth();
 
+// 🔒 ADMIN PAGE PROTECTION
 onAuthStateChanged(auth, (user) => {
   if (!user) {
     window.location.href = "admin-login.html";
   }
 });
+;
 
 import { db } from "./firebase.js";
 import {
@@ -408,4 +410,5 @@ document.getElementById("pImageFile")
 
   reader.readAsDataURL(file);
 });
+
 
