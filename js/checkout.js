@@ -43,7 +43,7 @@ function getCart() {
 }
 
 function calculateSubtotal(cart) {
-  return cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  return cart.reduce((sum, item) => sum + (item.price || 0) * (item.qty || 0), 0);
 }
 
 
@@ -62,18 +62,14 @@ function renderOrder() {
 
   orderItemsEl.innerHTML = cart.map(item => `
     <div class="order-item">
-
       <img src="${item.image || 'images/placeholder.png'}">
-
       <div class="order-info">
         <h4>${item.name}</h4>
         <small>${item.unit} × ${item.qty}</small>
       </div>
-
       <div class="order-price">
-        ৳ ${item.price * item.qty}
+        ৳ ${(item.price || 0) * (item.qty || 0)}
       </div>
-
     </div>
   `).join("");
 
@@ -111,6 +107,13 @@ confirmBtn.addEventListener("click", async () => {
 
   if (!agreeTerms.checked) {
     alert("Please agree to Terms & Conditions");
+    return;
+  }
+
+  cart = getCart();
+
+  if (!cart.length) {
+    alert("Cart is empty.");
     return;
   }
 
@@ -180,22 +183,30 @@ confirmBtn.addEventListener("click", async () => {
       createdAt: new Date().toISOString()
     });
 
-    // ================= REDUCE STOCK =================
+    // ================= SAFE STOCK REDUCTION =================
 
-    for (let item of cart) {
+    try {
 
-      const productRef = doc(db, "products", item.id);
-      const productSnap = await getDoc(productRef);
+      for (let item of cart) {
 
-      if (productSnap.exists()) {
+        if (!item.id) continue; // prevent crash
 
-        const productData = productSnap.data();
-        const newStock = (productData.stock || 0) - item.qty;
+        const productRef = doc(db, "products", item.id);
+        const productSnap = await getDoc(productRef);
 
-        await updateDoc(productRef, {
-          stock: newStock < 0 ? 0 : newStock
-        });
+        if (productSnap.exists()) {
+
+          const productData = productSnap.data();
+          const newStock = (productData.stock || 0) - (item.qty || 0);
+
+          await updateDoc(productRef, {
+            stock: newStock < 0 ? 0 : newStock
+          });
+        }
       }
+
+    } catch (stockError) {
+      console.warn("Stock update failed:", stockError);
     }
 
     // ================= CLEAR CART =================
