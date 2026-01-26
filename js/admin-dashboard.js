@@ -290,12 +290,17 @@ async function renderOrders() {
       <div class="cart-item" style="flex-direction:column;align-items:flex-start">
 
         <div style="width:100%">
-          <strong>Order ID:</strong> ${id}<br>
+         <strong>Firestore ID:</strong> ${id}<br>
+<strong>Public ID:</strong> ${o.publicId || "—"}<br>
+
           <strong>Status:</strong> ${o.status || "Pending"}<br><br>
 
-          <strong>Customer:</strong> ${o.customer?.name}<br>
-          <strong>Phone:</strong> ${o.customer?.phone}<br>
-          <strong>Address:</strong> ${o.customer?.address}<br><br>
+         <strong>Customer:</strong> ${o.customer?.firstName || ""} ${o.customer?.lastName || ""}<br>
+
+<strong>Phone:</strong> ${o.customer?.phone || "-"}<br>
+<strong>Address:</strong> ${o.customer?.address || "-"}<br>
+
+
 
           <strong>Payment:</strong> ${o.payment?.method}<br>
           ${o.payment?.trxId ? `<strong>TRX ID:</strong> ${o.payment.trxId}<br>` : ""}
@@ -410,5 +415,6 @@ document.getElementById("pImageFile")
 
   reader.readAsDataURL(file);
 });
+
 
 
