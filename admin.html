@@ -132,28 +132,53 @@
 
       <div class="form-grid">
 
-        <input id="pName" placeholder="Product Name">
-        <input id="pPrice" type="number" placeholder="Price">
+       <div class="form-grid">
 
-        <input id="pUnit" placeholder="Unit (1kg, 1pc)">
-      
-<div class="image-upload-wrapper">
-  <input type="file" id="pImageFile" accept="image/*">
+  <div class="form-group">
+    <input id="pName" required />
+    <label for="pName">Product Name</label>
+  </div>
 
-  <input type="hidden" id="pImage">
+  <div class="form-group">
+    <input id="pPrice" type="number" required />
+    <label for="pPrice">Price</label>
+  </div>
 
-  <img id="imagePreview"
-       style="max-width:120px;margin-top:10px;display:none;border-radius:8px;">
+  <div class="form-group">
+    <input id="pUnit" required />
+    <label for="pUnit">Unit (1kg, 1pc)</label>
+  </div>
+
+  <div class="form-group">
+    <input type="file" id="pImageFile" accept="image/*" />
+    <label class="file-label">Product Image</label>
+
+    <input type="hidden" id="pImage" />
+
+    <img
+      id="imagePreview"
+      style="max-width:120px;margin-top:10px;display:none;border-radius:8px;"
+    />
+  </div>
+
+  <div class="form-group">
+    <input id="pCategory" />
+    <label for="pCategory">Category</label>
+  </div>
+
+  <div class="form-group">
+    <input id="pStock" type="number" />
+    <label for="pStock">Stock Quantity</label>
+  </div>
+
+  <div class="form-group full">
+    <textarea id="pDesc" rows="4"></textarea>
+    <label for="pDesc">Description</label>
+  </div>
+
 </div>
-
-        <input id="pCategory" placeholder="Category">
-        <input id="pStock" type="number" placeholder="Stock Quantity">
-
-        <textarea id="pDesc" placeholder="Description"></textarea>
-
-      </div>
-
-     <div class="admin-form-actions">
+ </div>
+  <div class="admin-form-actions">
   <button id="addProductBtn" class="primary-btn">
     Add Product
   </button>
@@ -162,9 +187,6 @@
     Cancel Edit
   </button>
 </div>
-
-    </div>
-
     <div id="productList" class="admin-list"></div>
 
   </section>
@@ -225,3 +247,4 @@ navBackdrop?.addEventListener("click", () => {
 
 </body>
 </html>
+
