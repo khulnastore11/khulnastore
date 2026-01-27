@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khulna Store</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+
+  <div class="header-container">
+
+    <div class="logo">Khulna<span>Store</span></div>
+
+    <div class="header-search">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input id="searchInput" placeholder="Search products/Track order">
+      </div>
+    </div>
+
+    <div class="header-actions">
+      
+      <a href="cart.html" class="cart-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="8" cy="21" r="1"/>
+          <circle cx="19" cy="21" r="1"/>
+          <path d="M2 2h3l3.6 7.59h9.72L22 6H6"/>
+        </svg>
+        <span id="cartCount">0</span>
+      </a>
+
+      <button class="hamburger" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+  </div>
+
+</header>
+
+
+
+<!-- ================= PRODUCTS ================= -->
+<main class="products" id="productContainer">
+  <div class="loading">Loading products...</div>
+</main>
+
+<!-- ================= PRODUCT MODAL ================= -->
+<div class="modal" id="productModal">
+  <div class="modal-overlay" id="modalOverlay"></div>
+  <div class="modal-card">
+    <button class="modal-close" id="closeModal">×</button>
+    <div class="modal-body" id="modalContent"></div>
+  </div>
+</div>
+
+<!-- ================= NAV ================= -->
+<div class="nav-wrapper" id="navWrapper">
+  <div class="nav-backdrop" id="navBackdrop"></div>
+  <div class="nav-dropdown">
+    <a href="index.html">Home</a>
+    <a href="order-status.html">Track Order</a>
+    <a href="order-status.html">My Orders</a>
+    <a href="about.html">About Us</a>
+    <a href="contact.html">Contact</a>
+    <a href="terms.html">Terms & Policy</a>
+  </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-col">
+      <h4>Khulna Store</h4>
+      <p>Your trusted online shop for quality products.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="index.html">Home</a>
+      <a href="order-status.html">Track Order</a>
+      <a href="#">Contact</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Support</h4>
+      <p>Email: support@khulnastore.com</p>
+      <p>Phone: 01XXXXXXXXX</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Khulna Store. All rights reserved.
+  </div>
+</footer>
+
+<div id="toast" class="toast"></div>
+
+
+<script type="module" src="js/index.js"></script>
+
+</body>
+</html>

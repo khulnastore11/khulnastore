@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Khulna Store</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ================= HEADER (MATCH INDEX STRUCTURE) ================= -->
+
+<!-- ================= HEADER (SAME AS INDEX) ================= -->
+<header class="header">
+
+  <div class="header-container">
+
+    <div class="logo">Khulna<span>Store</span></div>
+
+    <div class="header-search">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input placeholder="Search products..." onclick="window.location.href='index.html'">
+      </div>
+    </div>
+
+    <div class="header-actions">
+<button onclick="logout()" class="admin-logout">
+  Logout
+</button>
+
+     
+
+      <button class="hamburger" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+
+  </div>
+
+</header>
+
+<!-- NAV DROPDOWN -->
+<div class="nav-wrapper" id="navWrapper">
+  <div class="nav-backdrop" id="navBackdrop"></div>
+  <div class="nav-dropdown" id="navDropdown">
+    <a href="index.html">Home</a>
+    <a href="order-status.html">Track Order</a>
+    <a href="order-status.html">My Orders</a>
+    <a href="about.html">About Us</a>
+    <a href="contact.html">Contact</a>
+    <a href="terms.html">Terms & Policy</a>
+  </div>
+</div>
+
+
+
+  <!-- ================= KPI DASHBOARD ================= -->
+<section class="admin-kpi">
+
+  <div class="kpi-card">
+    <div class="kpi-label">Total Products</div>
+    <div class="kpi-value" id="kpiProducts">0</div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-label">Total Orders</div>
+    <div class="kpi-value" id="kpiOrders">0</div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-label">Pending Orders</div>
+    <div class="kpi-value" id="kpiPending">0</div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-label">Revenue</div>
+    <div class="kpi-value" id="kpiRevenue">৳ 0</div>
+  </div>
+
+  <div class="kpi-card kpi-warning">
+    <div class="kpi-label">Low Stock</div>
+    <div class="kpi-value" id="kpiLowStock">0</div>
+  </div>
+
+</section>
+
+
+      
+
+    
+<!-- ================= MAIN CONTENT ================= -->
+<main class="container admin-container">
+
+  <!-- TABS -->
+<div class="admin-tabs">
+  <button class="tab-btn active-tab"
+          data-section="orders"
+          onclick="showSection('orders')">
+    Orders
+  </button>
+
+  <button class="tab-btn"
+          data-section="products"
+          onclick="showSection('products')">
+    Products
+  </button>
+</div>
+
+
+
+  <!-- ================= ORDERS SECTION ================= -->
+  <section id="ordersSection" class="admin-section">
+    <h2>Manage Orders</h2>
+  <div class="order-filters">
+  <button class="order-tab active" data-status="All">All</button>
+  <button class="order-tab" data-status="Pending">Pending</button>
+  <button class="order-tab" data-status="Confirmed">Confirmed</button>
+  <button class="order-tab" data-status="Delivered">Delivered</button>
+  <button class="order-tab" data-status="Cancelled">Cancelled</button>
+</div>
+
+
+<div id="ordersList"></div>
+
+    <div id="ordersList" class="admin-list"></div>
+  </section>
+
+
+  <!-- ================= PRODUCTS SECTION ================= -->
+  <section id="productsSection" class="admin-section" style="display:none;">
+    <h2>Manage Products</h2>
+
+    <div class="admin-form">
+
+      <input type="hidden" id="editProductId">
+
+      <div class="form-grid">
+
+    <div class="form-grid">
+
+  <div class="form-group">
+    <input id="pName" required />
+    <label for="pName">Product Name</label>
+  </div>
+
+  <div class="form-group">
+    <input id="pPrice" type="number" required />
+    <label for="pPrice">Price</label>
+  </div>
+
+  <div class="form-group">
+    <input id="pUnit" required />
+    <label for="pUnit">Unit (1kg, 1pc)</label>
+  </div>
+
+    <div class="image-group">
+  <label>Product Images (Max 3)</label>
+
+  <input type="file" id="pImageFile1">
+  <input type="file" id="pImageFile2">
+  <input type="file" id="pImageFile3">
+
+  <label style="margin-top:10px;">Select Featured Image</label>
+  <select id="featuredIndex">
+    <option value="0">Image 1</option>
+    <option value="1">Image 2</option>
+    <option value="2">Image 3</option>
+  </select>
+</div>
+
+  
+
+  <div class="form-group">
+    <input id="pCategory" />
+    <label for="pCategory">Category</label>
+  </div>
+
+  <div class="form-group">
+    <input id="pStock" type="number" />
+    <label for="pStock">Stock Quantity</label>
+  </div>
+
+  <div class="form-group full">
+    <textarea id="pDesc" rows="4"></textarea>
+    <label for="pDesc">Description</label>
+  </div>
+
+</div>
+
+
+   
+    </div>
+  <div class="admin-form-actions">
+  <button id="addProductBtn" class="primary-btn">
+    Add Product
+  </button>
+
+  <button id="cancelEditBtn" class="secondary-btn" style="display:none;">
+    Cancel Edit
+  </button>
+</div>
+
+    <div id="productList" class="admin-list"></div>
+
+  </section>
+
+</main>
+
+
+<!-- ================= FOOTER (MATCH INDEX STYLE) ================= -->
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <div class="footer-col">
+      <h4>KhulnaStore</h4>
+      <p>Admin Dashboard</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="index.html">Home</a>
+      <a href="order-status.html">Track Order</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="#">Contact</a>
+      <a href="#">Terms & Policy</a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Khulna Store. All rights reserved.
+  </div>
+
+</footer>
+
+
+<!-- ================= TOAST ================= -->
+<div id="toast" class="toast"></div>
+<script>
+/* NAV TOGGLE */
+const menuToggle = document.getElementById("menuToggle");
+const navWrapper = document.getElementById("navWrapper");
+const navBackdrop = document.getElementById("navBackdrop");
+
+menuToggle?.addEventListener("click", () => {
+  menuToggle.classList.toggle("active");
+  navWrapper.classList.toggle("open");
+});
+
+navBackdrop?.addEventListener("click", () => {
+  menuToggle.classList.remove("active");
+  navWrapper.classList.remove("open");
+});
+</script>
+<script type="module" src="js/admin-dashboard.js"></script>
+
+</body>
+</html>

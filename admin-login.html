@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ADMIN LOGIN </title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ================= HEADER (SAME AS INDEX) ================= -->
+<header class="header">
+
+  <div class="header-container">
+
+    <div class="logo">Khulna<span>Store</span></div>
+
+    <div class="header-search">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input placeholder="Search products..." onclick="window.location.href='index.html'">
+      </div>
+    </div>
+
+    <div class="header-actions">
+
+      <a href="cart.html" class="cart-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="8" cy="21" r="1"/>
+          <circle cx="19" cy="21" r="1"/>
+          <path d="M2 2h3l3.6 7.59h9.72L22 6H6"/>
+        </svg>
+        <span id="cartCount">0</span>
+      </a>
+
+      <button class="hamburger" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+
+  </div>
+
+</header>
+
+<!-- NAV DROPDOWN -->
+<div class="nav-wrapper" id="navWrapper">
+  <div class="nav-backdrop" id="navBackdrop"></div>
+  <div class="nav-dropdown" id="navDropdown">
+    <a href="index.html">Home</a>
+    <a href="order-status.html">Track Order</a>
+    <a href="order-status.html">My Orders</a>
+    <a href="about.html">About Us</a>
+    <a href="contact.html">Contact</a>
+    <a href="terms.html">Terms & Policy</a>
+  </div>
+</div>
+
+
+<main class="checkout">
+
+  <div class="checkout-card">
+    <h3>Admin Sign In</h3>
+
+    <input id="adminEmail" type="email" placeholder="Email">
+    <input id="adminPassword" type="password" placeholder="Password">
+
+    <button id="loginBtn" class="checkout-btn" style="margin-top:10px;">
+      Login
+    </button>
+
+    <p id="loginError" style="color:red;margin-top:10px;display:none;"></p>
+  </div>
+
+</main>
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <div class="footer-col">
+      <h4>KhulnaStore</h4>
+      <p>Quality products at best prices.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="index.html">Home</a>
+      <a href="order-status.html">Track Order</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="terms.html">Terms & Policy</a>
+      <a href="about.html">About Us</a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Khulna Store. All rights reserved.
+  </div>
+
+</footer>
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+/* NAV TOGGLE */
+const menuToggle = document.getElementById("menuToggle");
+const navWrapper = document.getElementById("navWrapper");
+const navBackdrop = document.getElementById("navBackdrop");
+
+menuToggle?.addEventListener("click", () => {
+  menuToggle.classList.toggle("active");
+  navWrapper.classList.toggle("open");
+});
+
+navBackdrop?.addEventListener("click", () => {
+  menuToggle.classList.remove("active");
+  navWrapper.classList.remove("open");
+});
+</script>
+<script type="module" src="js/admin-login.js"></script>
+
+</body>
+</html>
