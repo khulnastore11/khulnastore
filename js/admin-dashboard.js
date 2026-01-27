@@ -402,14 +402,20 @@ document.addEventListener("click", (e) => {
 
 
 /* ===== STATUS UPDATE ===== */
+/* ===== STATUS UPDATE ===== */
 document.addEventListener("change", async (e) => {
 
   if (e.target.classList.contains("status-select")) {
+
     const id = e.target.dataset.id;
     const status = e.target.value;
+
     await updateDoc(doc(db, "orders", id), { status });
+
     showToast("Status updated");
+
     loadKPIs();
+    renderOrders(); // ✅ THIS WAS MISSING
   }
 
 });
@@ -469,6 +475,7 @@ document.getElementById("pImageFile")
 
   reader.readAsDataURL(file);
 });
+
 
 
 
