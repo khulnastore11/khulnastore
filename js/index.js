@@ -51,7 +51,10 @@ function renderProducts(list) {
           ${isAvailable ? "In Stock" : "Out of Stock"}
         </div>
 
-        <img src="${p.image}" alt="${p.name}">
+        const featuredImage =
+  p.images?.[p.featuredIndex || 0] || "images/placeholder.png";
+<img src="${featuredImage}">
+
 
         <div class="card-body">
           <h4>${p.name}</h4>
@@ -258,3 +261,4 @@ if (menuToggle && navWrapper) {
 // ================= INIT =================
 updateCartCount();
 loadProducts();
+
