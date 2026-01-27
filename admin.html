@@ -113,11 +113,18 @@
 
   <!-- TABS -->
   <div class="admin-tabs">
-    
-    <button onclick="showSection('products')">
-      Products
-    </button>
-  </div>
+  <button class="tab-btn active-tab"
+          data-section="orders"
+          onclick="showSection('orders')">
+    Orders
+  </button>
+
+  <button class="tab-btn"
+          data-section="products"
+          onclick="showSection('products')">
+    Products
+  </button>
+</div>
 
 
   <!-- ================= ORDERS SECTION ================= -->
@@ -258,6 +265,7 @@ navBackdrop?.addEventListener("click", () => {
 
 </body>
 </html>
+
 
 
 
