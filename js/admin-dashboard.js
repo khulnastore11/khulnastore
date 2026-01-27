@@ -44,18 +44,21 @@ document.addEventListener("DOMContentLoaded", () => {
 /* ================= SECTION TABS ================= */
 window.showSection = function(type) {
 
-  document.getElementById("ordersSection").style.display =
-    type === "orders" ? "block" : "none";
+  const ordersSection = document.getElementById("ordersSection");
+  const productsSection = document.getElementById("productsSection");
+  const tabs = document.querySelectorAll(".admin-tabs button");
 
-  document.getElementById("productsSection").style.display =
-    type === "products" ? "block" : "none";
+  tabs.forEach(btn => btn.classList.remove("active-tab"));
 
-  document.querySelectorAll(".tab-btn").forEach(btn => {
-    btn.classList.toggle(
-      "active-tab",
-      btn.dataset.section === type
-    );
-  });
+  if (type === "orders") {
+    ordersSection.style.display = "block";
+    productsSection.style.display = "none";
+    tabs[0].classList.add("active-tab");
+  } else {
+    ordersSection.style.display = "none";
+    productsSection.style.display = "block";
+    tabs[1].classList.add("active-tab");
+  }
 };
 
 /* ================= TOAST ================= */
@@ -236,8 +239,6 @@ function resetForm() {
 /* ================= ORDERS SECTION ==================== */
 /* ===================================================== */
 
-let currentStatusFilter = "All";
-
 async function renderOrders() {
 
   const list = document.getElementById("ordersList");
@@ -254,24 +255,10 @@ async function renderOrders() {
 
   list.innerHTML = "";
 
-  // Convert to array + sort newest first
-  const orders = snapshot.docs
-    .map(docSnap => ({
-      id: docSnap.id,
-      ...docSnap.data()
-    }))
-    .sort((a, b) =>
-      new Date(b.createdAt || 0) - new Date(a.createdAt || 0)
-    );
+  snapshot.forEach(docSnap => {
 
-  orders.forEach(o => {
-
-    // FILTER BY STATUS
-    if (currentStatusFilter !== "All" && o.status !== currentStatusFilter) {
-      return;
-    }
-
-    const id = o.id;
+    const o = docSnap.data();
+    const id = docSnap.id;
 
     const itemsHtml = (o.items || []).map(item => `
       <div style="display:flex;gap:10px;margin-bottom:8px">
@@ -303,28 +290,15 @@ async function renderOrders() {
       <div class="cart-item" style="flex-direction:column;align-items:flex-start">
 
         <div style="width:100%">
-          <strong>Firestore ID:</strong> ${id}<br>
-          <strong>Public ID:</strong> ${o.publicId || "—"}<br>
+          <strong>Order ID:</strong> ${id}<br>
+          <strong>Status:</strong> ${o.status || "Pending"}<br><br>
 
-          <strong>Status:</strong> 
-          <span style="
-            padding:4px 8px;
-            border-radius:6px;
-            font-weight:600;
-            background:${getStatusColor(o.status)};
-            color:#fff;
-          ">
-            ${o.status || "Pending"}
-          </span>
-          <br><br>
+          <strong>Customer:</strong> ${o.customer?.name}<br>
+          <strong>Phone:</strong> ${o.customer?.phone}<br>
+          <strong>Address:</strong> ${o.customer?.address}<br><br>
 
-          <strong>Customer:</strong> 
-          ${o.customer?.firstName || ""} ${o.customer?.lastName || ""}<br>
-          <strong>Phone:</strong> ${o.customer?.phone || "-"}<br>
-          <strong>Address:</strong> ${o.customer?.address || "-"}<br><br>
-
-          <strong>Payment:</strong> ${o.payment?.method || "-"}<br>
-          ${o.payment?.transactionId ? `<strong>TRX ID:</strong> ${o.payment.transactionId}<br>` : ""}
+          <strong>Payment:</strong> ${o.payment?.method}<br>
+          ${o.payment?.trxId ? `<strong>TRX ID:</strong> ${o.payment.trxId}<br>` : ""}
           ${o.payment?.payerNumber ? `<strong>Payer:</strong> ${o.payment.payerNumber}<br>` : ""}
         </div>
 
@@ -347,9 +321,7 @@ async function renderOrders() {
         <textarea data-id="${id}" 
                   class="admin-note"
                   placeholder="Add internal note..."
-                  style="width:100%;padding:8px;border-radius:6px;border:1px solid #ddd">
-          ${o.adminNote || ""}
-        </textarea>
+                  style="width:100%;padding:8px;border-radius:6px;border:1px solid #ddd">${o.adminNote || ""}</textarea>
 
         <button class="save-note-btn primary-btn" 
                 data-id="${id}" 
@@ -370,51 +342,18 @@ async function renderOrders() {
   });
 }
 
-function getStatusColor(status) {
-  switch (status) {
-    case "Pending": return "#ff9800";
-    case "Confirmed": return "#2196f3";
-    case "Delivered": return "#2e7d32";
-    case "Cancelled": return "#d32f2f";
-    default: return "#777";
-  }
-}
-
-
-
-
-
 /* ===== STATUS UPDATE ===== */
 document.addEventListener("change", async (e) => {
 
   if (e.target.classList.contains("status-select")) {
-
     const id = e.target.dataset.id;
     const status = e.target.value;
-
     await updateDoc(doc(db, "orders", id), { status });
-
     showToast("Status updated");
-
     loadKPIs();
-    renderOrders(); // ✅ THIS WAS MISSING
   }
 
 });
-
-document.addEventListener("click", (e) => {
-  if (e.target.classList.contains("order-tab")) {
-
-    document.querySelectorAll(".order-tab")
-      .forEach(btn => btn.classList.remove("active"));
-
-    e.target.classList.add("active");
-
-    currentStatusFilter = e.target.dataset.status;
-    renderOrders();
-  }
-});
-
 
 /* ================= KPI ================= */
 async function loadKPIs() {
@@ -471,6 +410,3 @@ document.getElementById("pImageFile")
 
   reader.readAsDataURL(file);
 });
-
-
-
