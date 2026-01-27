@@ -51,10 +51,7 @@ function renderProducts(list) {
           ${isAvailable ? "In Stock" : "Out of Stock"}
         </div>
 
-        const featuredImage =
-  p.images?.[p.featuredIndex || 0] || "images/placeholder.png";
-<img src="${featuredImage}">
-
+        <img src="${p.image}" alt="${p.name}">
 
         <div class="card-body">
           <h4>${p.name}</h4>
@@ -147,8 +144,7 @@ function openModal(product) {
   const isAvailable = product.stock > 0;
 
   modalContent.innerHTML = `
-    product.images.forEach(...)
-
+    <img src="${product.image}">
     <h3>${product.name}</h3>
 
     <div class="modal-stock ${isAvailable ? "in" : "out"}">
@@ -262,5 +258,3 @@ if (menuToggle && navWrapper) {
 // ================= INIT =================
 updateCartCount();
 loadProducts();
-
-
