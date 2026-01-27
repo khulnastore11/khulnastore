@@ -44,21 +44,18 @@ document.addEventListener("DOMContentLoaded", () => {
 /* ================= SECTION TABS ================= */
 window.showSection = function(type) {
 
-  const ordersSection = document.getElementById("ordersSection");
-  const productsSection = document.getElementById("productsSection");
-  const tabs = document.querySelectorAll(".admin-tabs button");
+  document.getElementById("ordersSection").style.display =
+    type === "orders" ? "block" : "none";
 
-  tabs.forEach(btn => btn.classList.remove("active-tab"));
+  document.getElementById("productsSection").style.display =
+    type === "products" ? "block" : "none";
 
-  if (type === "orders") {
-    ordersSection.style.display = "block";
-    productsSection.style.display = "none";
-    tabs[0].classList.add("active-tab");
-  } else {
-    ordersSection.style.display = "none";
-    productsSection.style.display = "block";
-    tabs[1].classList.add("active-tab");
-  }
+  document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.classList.toggle(
+      "active-tab",
+      btn.dataset.section === type
+    );
+  });
 };
 
 /* ================= TOAST ================= */
@@ -475,6 +472,7 @@ document.getElementById("pImageFile")
 
   reader.readAsDataURL(file);
 });
+
 
 
 
