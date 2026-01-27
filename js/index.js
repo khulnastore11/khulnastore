@@ -147,7 +147,8 @@ function openModal(product) {
   const isAvailable = product.stock > 0;
 
   modalContent.innerHTML = `
-    <img src="${product.image}">
+    product.images.forEach(...)
+
     <h3>${product.name}</h3>
 
     <div class="modal-stock ${isAvailable ? "in" : "out"}">
@@ -261,4 +262,5 @@ if (menuToggle && navWrapper) {
 // ================= INIT =================
 updateCartCount();
 loadProducts();
+
 
