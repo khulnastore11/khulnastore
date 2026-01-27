@@ -86,6 +86,76 @@ async function renderProducts() {
   });
 }
 
+
+/* ===================================================== */
+/* ================= ORDERS SECTION ==================== */
+/* ===================================================== */
+
+async function renderOrders() {
+
+  const list = document.getElementById("ordersList");
+  if (!list) return;
+
+  list.innerHTML = "Loading...";
+
+  const snapshot = await getDocs(collection(db, "orders"));
+
+  if (snapshot.empty) {
+    list.innerHTML = "<p>No orders yet.</p>";
+    return;
+  }
+
+  list.innerHTML = "";
+
+  snapshot.forEach(docSnap => {
+
+    const o = docSnap.data();
+    const id = docSnap.id;
+
+    list.innerHTML += `
+      <div class="cart-item" style="flex-direction:column;align-items:flex-start">
+
+        <div style="width:100%">
+          <strong>Firestore ID:</strong> ${id}<br>
+          <strong>Public ID:</strong> ${o.publicId || "—"}<br>
+          <strong>Status:</strong> ${o.status || "Pending"}<br><br>
+
+          <strong>Customer:</strong>
+          ${o.customer?.firstName || ""} ${o.customer?.lastName || ""}<br>
+
+          <strong>Phone:</strong> ${o.customer?.phone || "-"}<br>
+          <strong>Address:</strong> ${o.customer?.address || "-"}<br><br>
+
+          <strong>Total:</strong> ৳ ${o.total || 0}
+        </div>
+
+      </div>
+    `;
+  });
+}
+/* ================= KPI ================= */
+
+async function loadKPIs() {
+
+  const productSnap = await getDocs(collection(db, "products"));
+  const products = productSnap.docs.map(d => d.data());
+
+  const orderSnap = await getDocs(collection(db, "orders"));
+  const orders = orderSnap.docs.map(d => d.data());
+
+  document.getElementById("kpiProducts").textContent =
+    products.length;
+
+  document.getElementById("kpiOrders").textContent =
+    orders.length;
+
+  const revenue = orders.reduce((sum, o) =>
+    sum + (o.total || 0), 0);
+
+  document.getElementById("kpiRevenue").textContent =
+    `৳ ${revenue}`;
+}
+
 /* ===== ADD / UPDATE PRODUCT ===== */
 async function handleSubmit() {
 
@@ -184,3 +254,4 @@ async function uploadToCloudinary(file) {
 
   return data.secure_url;
 }
+
