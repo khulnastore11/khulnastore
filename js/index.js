@@ -45,7 +45,9 @@ function renderProducts(list) {
     const isAvailable = p.stock > 0;
 
     return `
-      <div class="product-card ${!isAvailable ? "out-stock" : ""}" data-id="${p.id}">
+
+
+<div class="product-card ${!isAvailable ? "out-stock" : ""}" data-id="${p.id}">
         
         <div class="stock-badge ${isAvailable ? "in" : "out"}">
           ${isAvailable ? "In Stock" : "Out of Stock"}
@@ -68,8 +70,7 @@ function renderProducts(list) {
     Buy Now
   </button>
 </div>
-
-        </div>
+</div>
       </div>
     `;
   }).join("");
@@ -399,3 +400,4 @@ if (menuToggle && navWrapper) {
 // ================= INIT =================
 updateCartCount();
 loadProducts();
+
