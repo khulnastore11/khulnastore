@@ -185,7 +185,7 @@ main {
   align-items: start;   /* prevents vertical stretch */
 }
 
- .product-card {
+  .product-card {
   background: #fff;
   border-radius: 14px;
   padding: 14px;
@@ -196,6 +196,8 @@ main {
 
   height: 80%;           /* fill grid cell properly */
 }
+
+
 
 /* STOCK BADGE */
 
@@ -233,12 +235,15 @@ main {
 .card-body {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  flex: 1;
 }
+
 
 .card-body h4 {
   font-size: 14px;
   font-weight: 600;
+  line-height: 1.3;
+  min-height: 36px;     /* 2 lines fixed height */
 }
 
 .unit {
@@ -250,6 +255,8 @@ main {
   font-weight: 700;
   font-size: 15px;
   color: #2e7d32;
+  margin-top: auto;     /* 🔥 pushes price down */
+  margin-bottom: 8px;   /* space before buttons */
 }
 
 .add-btn {
@@ -263,6 +270,23 @@ main {
   cursor: pointer;
 }
 
+.buy-btn {
+  margin-top: 6px;   /* small spacing only */
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  background: #2e7d32;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+}
+.card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+
 /* MOBILE GRID */
 
 @media (max-width: 768px) {
@@ -271,7 +295,7 @@ main {
     gap: 14px;
     padding: 14px;
   } 
-    .product-card {
+  .product-card {
   background: #fff;
   border-radius: 14px;
   padding: 14px;
@@ -282,6 +306,7 @@ main {
 
   height: 100%;           /* fill grid cell properly */
 }
+
 }
 
 /* ================= NAV ================= */
@@ -517,16 +542,7 @@ main {
 
 }
 
-.buy-btn {
-  margin-top: 6px;   /* small spacing only */
-  padding: 8px;
-  border-radius: 8px;
-  border: none;
-  background: #2e7d32;
-  color: #fff;
-  font-weight: 500;
-  cursor: pointer;
-}
+
 
 
 /* ================= FOOTER ================= */
@@ -1084,7 +1100,7 @@ main {
 }
 
 .primary-btn {
-  background: #2e7d32;
+  background: #000000;
   color: #fff;
   padding: 12px 20px;
   border-radius: 10px;
@@ -1494,7 +1510,7 @@ border: 1px solid #e2e2e2;
 .confirm-btn {
   width: 100%;
   padding: 16px;
-  background: #2e7d32;
+  background: #000000;
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -1503,7 +1519,7 @@ border: 1px solid #e2e2e2;
 }
 
 .confirm-btn:hover {
-  background: #256428;
+  background: #2e352f;
 }
 
 @media (min-width: 768px) {
@@ -1816,7 +1832,7 @@ border: 1px solid #e2e2e2;
 }
 
 .primary-btn:hover {
-  background: #256428;
+  background: #292c29;
   transform: translateY(-1px);
 }
 input[type="file"] {
@@ -2061,6 +2077,7 @@ input[type="file"] {
   background: #444;
 }
 
+/* Push buttons to bottom */
  .card-actions {
   display: flex;
   flex-direction: column;
@@ -2110,7 +2127,3 @@ input[type="file"] {
   background: rgba(46,125,50,0.12);
   color: #2e7d32;
 }
-
-
-
-
