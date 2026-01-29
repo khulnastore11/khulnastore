@@ -352,8 +352,11 @@ if (o.createdAt?.seconds) {
 
         <div style="width:100%">
           <strong>Firestore ID:</strong> ${id}<br>
+          <br>
           <strong>Public ID:</strong> ${o.publicId || "—"}<br>
 
+
+<br>
           <strong>Status:</strong> 
           <span style="
             padding:4px 8px;
@@ -364,15 +367,14 @@ if (o.createdAt?.seconds) {
           ">
             ${o.status || "Pending"}
           </span>
+          
           <br><strong>Order Date:</strong> ${orderDate}<br>
-<br>
+          <br>
 
           <strong>Customer:</strong> 
           ${o.customer?.firstName || ""} ${o.customer?.lastName || ""}<br>
           <strong>Phone:</strong> ${o.customer?.phone || "-"}<br>
-          
-          <strong>Upazila / Thana:</strong> ${o.customer?.area || "-"}<br>
-
+           <strong>Upazila / Thana:</strong> ${o.customer?.area || "-"}<br>
           <strong>District:</strong> ${o.customer?.district || "-"}<br><br>
           <strong>Address:</strong> ${o.customer?.address || "-"}<br><br>
 
@@ -529,5 +531,6 @@ async function uploadToCloudinary(file) {
 
   return data.secure_url;
 }
+
 
 
