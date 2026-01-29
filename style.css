@@ -2127,3 +2127,61 @@ input[type="file"] {
   background: rgba(46,125,50,0.12);
   color: #2e7d32;
 }
+.merchant-box {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 12px;
+  background: #f8f9fa;
+  border: 1px solid #e5e5e5;
+}
+
+.merchant-label {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 6px;
+}
+
+.merchant-number {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+  letter-spacing: 1px;
+}
+
+.payment-input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.payment-input:focus {
+  border-color: #2e7d32;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(46,125,50,0.15);
+}
+.terms-box {
+  margin-top: 20px;
+  font-size: 14px;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.terms-box input {
+  margin-top: 4px;
+}
+
+.terms-box a {
+  color: #2e7d32;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.terms-box a:hover {
+  text-decoration: underline;
+}
+
