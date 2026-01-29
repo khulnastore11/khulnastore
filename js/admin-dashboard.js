@@ -356,7 +356,10 @@ if (o.createdAt?.seconds) {
           <strong>Public ID:</strong> ${o.publicId || "—"}<br>
 
 
-<br>
+
+
+          <br>
+          <br>
           <strong>Status:</strong> 
           <span style="
             padding:4px 8px;
@@ -367,7 +370,7 @@ if (o.createdAt?.seconds) {
           ">
             ${o.status || "Pending"}
           </span>
-          
+          <br>
           <br><strong>Order Date:</strong> ${orderDate}<br>
           <br>
 
@@ -531,6 +534,7 @@ async function uploadToCloudinary(file) {
 
   return data.secure_url;
 }
+
 
 
 
