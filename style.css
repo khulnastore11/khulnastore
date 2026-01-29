@@ -185,21 +185,18 @@ main {
   align-items: start;   /* prevents vertical stretch */
 }
 
-.product-card {
+ .product-card {
   background: #fff;
-
-
   border-radius: 14px;
   padding: 14px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
   position: relative;
 
-  /* prevents unwanted stretching */
-  height: auto;
+  height: 80%;           /* fill grid cell properly */
 }
+
 /* STOCK BADGE */
 
 .stock-badge {
@@ -273,7 +270,18 @@ main {
     grid-template-columns: repeat(2, 1fr);
     gap: 14px;
     padding: 14px;
-  }
+  } 
+    .product-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  position: relative;
+
+  height: 100%;           /* fill grid cell properly */
+}
 }
 
 /* ================= NAV ================= */
@@ -2052,3 +2060,57 @@ input[type="file"] {
 .custom-status {
   background: #444;
 }
+
+ .card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.add-btn,
+.buy-btn {
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.add-btn {
+  background: white;
+  border: 2px solid #111;
+  color: #111;
+}
+
+.add-btn:hover {
+  background: #111;
+  color: #fff;
+}
+.buy-btn {
+  background: #111;
+  border: none;
+  color: white;
+}
+
+.buy-btn:hover {
+  background: #2e7d32;
+  transform: translateY(-2px);
+}
+.stock-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 5px 12px;
+  font-size: 11px;
+  border-radius: 20px;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+.stock-badge.in {
+  background: rgba(46,125,50,0.12);
+  color: #2e7d32;
+}
+
+
+
+
