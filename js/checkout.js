@@ -157,10 +157,9 @@ confirmBtn.addEventListener("click", async () => {
   const firstName = document.getElementById("firstName").value.trim();
   const lastName = document.getElementById("lastName").value.trim();
   const phone = document.getElementById("phone").value.trim();
-
-  const address = document.getElementById("address").value.trim();
-  const area = document.getElementById("area").value.trim();
   const district = document.getElementById("district").value;
+  const area = document.getElementById("area").value.trim();
+  const address = document.getElementById("address").value.trim();
 
   const payerNumber = document.getElementById("payerNumber")?.value.trim();
   const trxId = document.getElementById("trxId")?.value.trim();
@@ -273,4 +272,5 @@ confirmBtn.addEventListener("click", async () => {
 document.addEventListener("DOMContentLoaded", () => {
   renderOrder();
 });
+
 
