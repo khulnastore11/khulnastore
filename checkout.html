@@ -208,23 +208,23 @@
         Pay to: <strong id="merchantNumber">01XXXXXXXXX</strong>
       </p>
 
-      <input id="payerNumber" placeholder="Your bKash/Nagad Number">
-      <input id="trxId" placeholder="Transaction ID">
+      <input id="payerNumber" class="payment-input" placeholder="Your bKash/Nagad Number">
+      <input id="trxId" class="payment-input" placeholder="Transaction ID">
+      
     </div>
   </section>
 
 
   <!-- ================= AGREEMENT ================= -->
-  <div class="agreement">
-    <input type="checkbox" id="agreeTerms">
-    <label>
-      I have read and agree to the
-      <a href="terms.html">Terms & Conditions</a>
-      and
-      <a href="terms.html">Privacy Policy</a>
-    </label>
-  </div>
-
+  <div class="terms-box">
+  <input type="checkbox" id="agreeTerms">
+  <label for="agreeTerms">
+    I agree to the 
+    <a href="terms.html">Terms & Conditions</a> and 
+    <a href="privacy.html">Privacy Policy</a>
+  </label>
+</div>
+<br>
   <button id="confirmOrderBtn" class="confirm-btn">
     Confirm Order
   </button>
@@ -283,3 +283,4 @@ navBackdrop?.addEventListener("click", () => {
 <script type="module" src="js/checkout.js"></script>
 </body>
 </html>
+
