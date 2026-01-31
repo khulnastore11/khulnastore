@@ -19,8 +19,8 @@ import {
 const DELIVERY_FEE = 60;
 
 const MERCHANT_NUMBERS = {
-  bkash: "017XXXXXXXX",
-  nagad: "018XXXXXXXX"
+  bkash: "01897700015",
+  nagad: "01897700015"
 };
 
 
@@ -272,5 +272,6 @@ confirmBtn.addEventListener("click", async () => {
 document.addEventListener("DOMContentLoaded", () => {
   renderOrder();
 });
+
 
 
